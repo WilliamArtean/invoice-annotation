@@ -149,14 +149,27 @@ function test() {
             stroke: 'red',
             strokeWidth: 2,
         });
+        let buttonGreenCircle = new Konva.Circle({
+            x: 20,
+            y: 100,
+            width: 16,
+            height: 16,
+            stroke: 'green',
+            strokeWidth: 2,
+        });
+
         paletteLayer.add(buttonRectBlue);
         paletteLayer.add(buttonRectRed);
+        paletteLayer.add(buttonGreenCircle);
 
         buttonRectBlue.on('click', function() {
             createShape('blue rectangle');      //Penser à des meilleurs noms peut-être ?
         });
         buttonRectRed.on('click', function() {
             createShape('red rectangle');
+        });
+        buttonGreenCircle.on('click', function() {
+            createShape('green circle');
         });
 
         paletteLayer.draw();
@@ -183,18 +196,6 @@ function test() {
                 console.log("event target was shape: " + e.target.name());
                 clickOnShape(e.target);
             }
-        });
-
-        editorStage.on('mousemove touchmove', () => {
-            const selectedShapes = tr.nodes();
-            if (selectedShapes.length >= 1) {
-                let shp = selectedShapes[0];
-                shp.width(shp.width() * shp.scaleX());
-                shp.scaleX(1);
-                shp.height(shp.height() * shp.scaleY());
-                shp.scaleY(1);
-            }
-            
         });
 
         editorLayer.draw();
@@ -239,6 +240,10 @@ function test() {
             case 'red rectangle':
                 createRedRectangle();
                 console.log("created red rectangle");
+                break;
+            case 'green circle':
+                createGreenCircle();
+                console.log("created green circle");
                 break;
             default:
                 console.log("Invalid shape name: cannot create shape");
@@ -306,10 +311,18 @@ function test() {
             draggable: 'true',
             id: 'shape',
         });
+
+        rectangleBlue.on('transform', () => {
+            rectangleBlue.setAttrs({
+                width: Math.max(rectangleBlue.width() * rectangleBlue.scaleX(), 8),
+                height: Math.max(rectangleBlue.height() * rectangleBlue.scaleY(), 8),
+                scaleX: 1,
+                scaleY: 1,
+            });
+        });
         
         editorLayer.add(rectangleBlue);
     }
-
     function createRedRectangle() {
         let rectangleRed = new Konva.Rect({
             name: "red rectangle",
@@ -322,8 +335,33 @@ function test() {
             draggable: 'true',
             id: 'shape',
         });
+
+        rectangleRed.on('transform', () => {
+            rectangleRed.setAttrs({
+                width: Math.max(rectangleRed.width() * rectangleRed.scaleX(), 8),
+                height: Math.max(rectangleRed.height() * rectangleRed.scaleY(), 8),
+                scaleX: 1,
+                scaleY: 1,
+            });
+        });
         
         editorLayer.add(rectangleRed);
+    }
+    function createGreenCircle() {
+        let circleGreen = new Konva.Circle({
+            name: "green circle",
+            x: 8,
+            y: 8,
+            width: 4,
+            height: 4,
+            stroke: 'green',
+            strokeWidth: 2,
+            draggable: 'false',
+            id: 'shape',
+            opacity: 0.5,
+        });
+        
+        editorLayer.add(circleGreen);
     }
 
     //Declaration of Stages and Layers
