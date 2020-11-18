@@ -172,6 +172,18 @@ function test() {
         });
         editorLayer.add(editorBorder);
 
+        editorStage.on('click tap', (e) => {
+            console.log("editor stage: stage click/tap event");
+
+            if (e.target.id() !== 'shape') {
+                console.log("event target was not a shape");
+                clickOnStage(editorStage);
+            } else {
+                console.log("event target was shape: " + e.target.name());
+                clickOnShape(e.target);
+            }
+        });
+
         editorLayer.draw();
     }
 
@@ -280,11 +292,7 @@ function test() {
             draggable: 'true',
             id: 'shape',
         });
-
-        rectangleBlue.on('click', function() {
-            clickOnShape(rectangleBlue);
-        });
-
+        
         editorLayer.add(rectangleBlue);
     }
 
@@ -300,11 +308,7 @@ function test() {
             draggable: 'true',
             id: 'shape',
         });
-
-        rectangleRed.on('click', function() {
-            clickOnShape(rectangleRed);
-        });
-
+        
         editorLayer.add(rectangleRed);
     }
 
