@@ -139,7 +139,7 @@ function test() {
             width: 100,
             height: 50,
             stroke: 'blue',
-            strokeWidth: 4,
+            strokeWidth: 2,
         });
         let buttonRectRed = new Konva.Rect({
             x: 160,
@@ -147,7 +147,7 @@ function test() {
             width: 100,
             height: 50,
             stroke: 'red',
-            strokeWidth: 4,
+            strokeWidth: 2,
         });
         paletteLayer.add(buttonRectBlue);
         paletteLayer.add(buttonRectRed);
@@ -172,6 +172,7 @@ function test() {
         });
         editorLayer.add(editorBorder);
 
+        //Click events
         editorStage.on('click tap', (e) => {
             console.log("editor stage: stage click/tap event");
 
@@ -182,6 +183,18 @@ function test() {
                 console.log("event target was shape: " + e.target.name());
                 clickOnShape(e.target);
             }
+        });
+
+        editorStage.on('mousemove touchmove', () => {
+            const selectedShapes = tr.nodes();
+            if (selectedShapes.length >= 1) {
+                let shp = selectedShapes[0];
+                shp.width(shp.width() * shp.scaleX());
+                shp.scaleX(1);
+                shp.height(shp.height() * shp.scaleY());
+                shp.scaleY(1);
+            }
+            
         });
 
         editorLayer.draw();
@@ -238,6 +251,7 @@ function test() {
 
     function clickOnShape(shape) {
         shape.moveToTop();
+        tr.moveToTop();
         tr.nodes([shape]);
 
         editorLayer.draw();
@@ -288,7 +302,7 @@ function test() {
             width: 100,
             height: 50,
             stroke: 'blue',
-            strokeWidth: 4,
+            strokeWidth: 2,
             draggable: 'true',
             id: 'shape',
         });
@@ -304,7 +318,7 @@ function test() {
             width: 100,
             height: 50,
             stroke: 'red',
-            strokeWidth: 4,
+            strokeWidth: 2,
             draggable: 'true',
             id: 'shape',
         });
@@ -379,10 +393,17 @@ function test() {
     editorStage.add(editorLayer);
 
     //Add transformer
+    var MIN_LENGTH = 8;
     var tr = new Konva.Transformer({
         resizeEnabled: true,
         rotateEnabled: false,
         keepRatio: false,
+        boundBoxFunc: function (oldBoundBox, newBoundBox) {
+            if (Math.abs(newBoundBox.width) < MIN_LENGTH || Math.abs(newBoundBox.height) < MIN_LENGTH) {
+                return oldBoundBox;
+            }
+            return newBoundBox;
+        },
     });
     editorLayer.add(tr);
 
