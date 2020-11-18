@@ -256,8 +256,13 @@ function test() {
 
     function clickOnShape(shape) {
         shape.moveToTop();
-        tr.moveToTop();
-        tr.nodes([shape]);
+
+        if (shape.getClassName() === 'Circle') {
+            tr.nodes([]);
+        } else {
+            tr.moveToTop();
+            tr.nodes([shape]);
+        }
 
         editorLayer.draw();
     }
@@ -349,7 +354,7 @@ function test() {
     }
     function createGreenCircle() {
         let circleGreen = new Konva.Circle({
-            name: "green circle",
+            name: 'green circle',
             x: 8,
             y: 8,
             width: 4,
