@@ -2,31 +2,6 @@
 'use strict';
 
 function test() {
-    function testCircle() {
-        // then create layer
-        let layer = new Konva.Layer();
-        
-        // create our shape
-        let circle = new Konva.Circle({
-            x: topMenuStage.width() / 2,
-            y: topMenuStage.height() / 2,
-            radius: 70,
-            fill: 'red',
-            stroke: 'black',
-            strokeWidth: 4
-        });
-        
-        // add the shape to the layer
-        layer.add(circle);
-        console.log("circle created");
-        
-        // add the layer to the stage
-        topMenuStage.add(layer);
-        
-        // draw the image
-        layer.draw();
-    }
-
     function loadImage(imageObj) {
         var imageObj = new Image();
         imageObj.src = 'img/invoice.gif';
@@ -40,15 +15,18 @@ function test() {
                 id: 'image',
             });
 
-            //fit image to browser height while keeping ratio
+            //fit image to browser width while keeping ratio
             let imageRatio = invoice.width() / invoice.height()
             console.log("image ratio : " + imageRatio);
-            invoice.height(editorLayer.height());
-            invoice.width(invoice.height() * imageRatio);
+            invoice.width(editorLayer.width());
+            invoice.height(invoice.width() / imageRatio);
+            //increase canvas height
+            document.getElementById('topmenu').y = invoice.height();
+            editorStage.height(invoice.height());
 
             //center image in the editor
-            let leftMargin = (editorLayer.width() - invoice.width()) / 2;
-            invoice.x(leftMargin);
+            //let leftMargin = (editorLayer.width() - invoice.width()) / 2;
+            //invoice.x(leftMargin);
             
             // add the shape to the layer
             editorLayer.add(invoice);
@@ -177,20 +155,13 @@ function test() {
     
     function buildEditor() {
         //Stage & layer set up
-        let editorBorder = new Konva.Rect({
-            width: stageWidth,
-            height: stageHeight,
-            stroke: 'black',
-            strokeWidth: 2,
-        });
-        editorLayer.add(editorBorder);
 
         //Click events
         editorStage.on('click tap', (e) => {
             console.log("editor stage: stage click/tap event");
 
             if (e.target.id() !== 'shape') {
-                console.log("event target was not a shape");
+                console.log("event target was not a shape : " + e.target.name());
                 clickOnStage(editorStage);
             } else {
                 console.log("event target was shape: " + e.target.name());
