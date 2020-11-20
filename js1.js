@@ -357,13 +357,14 @@ function test() {
             name: 'green circle',
             x: 8,
             y: 8,
-            width: 4,
-            height: 4,
+            width: 8,
+            height: 8,
+            fill: 'green',
             stroke: 'green',
-            strokeWidth: 2,
+            strokeWidth: 1,
             draggable: 'false',
             id: 'shape',
-            opacity: 0.5,
+            opacity: 0.7,
         });
         
         editorLayer.add(circleGreen);
