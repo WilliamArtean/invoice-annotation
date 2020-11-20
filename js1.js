@@ -275,11 +275,12 @@ function test() {
 
 
     function updateTree() {
-        let rects = editorStage.find('#shape');
+        let rects = editorStage.find('Shape');
         let images = editorStage.find('Image');
 
         let eol = '\n\t\t\t\t-';
         let imageList = '', shapeList = '';
+        let shapesNames = ['blue rectangle', 'red rectangle', 'green circle'];
         
         images.each(function(img) {
             if (img.id() === 'image') {
@@ -290,10 +291,10 @@ function test() {
         });
 
         rects.each(function(rect) {
-            if (rect.id() === 'shape') {
+            if (shapesNames.indexOf(rect.name()) !== -1) {
                 shapeList += eol + rect.name();
             } else {
-                console.log("Invalid shape id : " + rect.id());
+                console.log("Invalid shape name : " + rect.name());
             }
         });
         
@@ -306,7 +307,7 @@ function test() {
 
     function createBlueRectangle() {
         let rectangleBlue = new Konva.Rect({
-            name: "blue rectangle",
+            name: 'blue rectangle',
             x: 8,
             y: 8,
             width: 100,
@@ -314,7 +315,6 @@ function test() {
             stroke: 'blue',
             strokeWidth: 2,
             draggable: 'true',
-            id: 'shape',
         });
 
         rectangleBlue.on('transform', () => {
@@ -330,7 +330,7 @@ function test() {
     }
     function createRedRectangle() {
         let rectangleRed = new Konva.Rect({
-            name: "red rectangle",
+            name: 'red rectangle',
             x: 8,
             y: 8,
             width: 100,
@@ -338,7 +338,6 @@ function test() {
             stroke: 'red',
             strokeWidth: 2,
             draggable: 'true',
-            id: 'shape',
         });
 
         rectangleRed.on('transform', () => {
@@ -363,7 +362,6 @@ function test() {
             stroke: 'green',
             strokeWidth: 1,
             draggable: 'false',
-            id: 'shape',
             opacity: 0.7,
         });
         
