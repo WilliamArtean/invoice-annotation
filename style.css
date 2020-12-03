@@ -15,14 +15,14 @@ body {
 #palette {
     /*background-color: lightgray;*/
     float: left;
-    width: 300px;
+    width: 16%;
     height: 100%;
 }
 
 #tree {
     /*background-color: bisque;*/
     float: right;
-    width: 300px;
+    width: 15%;
     height: 100%;
 }
 #editor {

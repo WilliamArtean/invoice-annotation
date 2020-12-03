@@ -160,12 +160,12 @@ function test() {
         editorStage.on('click tap', (e) => {
             console.log("editor stage: stage click/tap event");
 
-            if (e.target.id() !== 'shape') {
-                console.log("event target was not a shape : " + e.target.name());
-                clickOnStage(editorStage);
-            } else {
-                console.log("event target was shape: " + e.target.name());
+            if (shapesNames.indexOf(e.target.name()) !== -1) {
+                console.log("click event target was shape: " + e.target.name());
                 clickOnShape(e.target);
+            } else {
+                console.log("click event target was not a valid shape : " + e.target.name());
+                clickOnStage(editorStage);
             }
         });
 
@@ -226,13 +226,16 @@ function test() {
 
 
     function clickOnShape(shape) {
-        shape.moveToTop();
-
-        if (shape.getClassName() === 'Circle') {
-            tr.nodes([]);
-        } else {
+        if (shape.getClassName() === 'Rect') {
+            console.log("clicked on rectangle");
+            shape.moveToTop();
             tr.moveToTop();
             tr.nodes([shape]);
+        } else {
+            tr.nodes([]);
+            if (shape.getClassName() !== 'Image') {
+                shape.moveToTop();
+            }
         }
 
         editorLayer.draw();
@@ -251,7 +254,6 @@ function test() {
 
         let eol = '\n\t\t\t\t-';
         let imageList = '', shapeList = '';
-        let shapesNames = ['blue rectangle', 'red rectangle', 'green circle'];
         
         images.each(function(img) {
             if (img.id() === 'image') {
@@ -404,6 +406,9 @@ function test() {
     var editorLayer = new Konva.Layer();
 
     editorStage.add(editorLayer);
+
+    //Declaration of valid shape names
+    var shapesNames = ['blue rectangle', 'red rectangle', 'green circle'];
 
     //Add transformer
     var MIN_LENGTH = 8;
