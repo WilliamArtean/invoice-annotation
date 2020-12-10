@@ -512,7 +512,7 @@ function test() {
     editorStage.add(editorLayer);
 
     //Declaration of valid shape names
-    var shapesNames = ['blue rectangle', 'red rectangle', 'green circle'];
+    var shapesNames = ['ROI', 'ROIRegion', 'POI', 'blue rectangle', 'red rectangle', 'green circle'];
 
     //Add transformer
     var MIN_SIZE = 8;
