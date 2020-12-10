@@ -129,25 +129,70 @@ function test() {
             strokeWidth: 2,
         });
         let buttonPOI = new Konva.Circle({
-            x: 20,
+            x: 70,
             y: 180,
             width: 16,
             height: 16,
             stroke: 'green',
             strokeWidth: 2,
         });
+        let buttonTextROIRegion = new Konva.Text({
+            x: 123,
+            y: 27,
+            text: "ROI Region",
+            fontSize: 20,
+            fontFamily: 'Calibri',
+            fill: 'black',
+            padding: 8,
+            align: 'left',
+            id: 'objectList',
+        });
+        let buttonTextROI = new Konva.Text({
+            x: 123,
+            y: 107,
+            text: "ROI",
+            fontSize: 20,
+            fontFamily: 'Calibri',
+            fill: 'black',
+            padding: 8,
+            align: 'left',
+            id: 'objectList',
+        });
+        let buttonTextPOI = new Konva.Text({
+            x: 123,
+            y: 162,
+            text: "POI",
+            fontSize: 20,
+            fontFamily: 'Calibri',
+            fill: 'black',
+            padding: 8,
+            align: 'left',
+            id: 'objectList',
+        });
 
         paletteLayer.add(buttonROIRegion);
         paletteLayer.add(buttonROI);
         paletteLayer.add(buttonPOI);
+        paletteLayer.add(buttonTextROIRegion);
+        paletteLayer.add(buttonTextROI);
+        paletteLayer.add(buttonTextPOI);
 
         buttonROIRegion.on('click', function() {
+            createShape('ROIRegion');
+        });
+        buttonTextROIRegion.on('click', function() {
             createShape('ROIRegion');
         });
         buttonROI.on('click', function() {
             createShape('ROI');
         });
+        buttonTextROI.on('click', function() {
+            createShape('ROI');
+        });
         buttonPOI.on('click', function() {
+            createShape('POI');
+        });
+        buttonTextPOI.on('click', function() {
             createShape('POI');
         });
 
