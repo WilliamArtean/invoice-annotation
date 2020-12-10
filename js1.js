@@ -158,7 +158,7 @@ function test() {
 
         //Click events
         editorStage.on('click tap', (e) => {
-            console.log("editor stage: stage click/tap event");
+            console.log("editor stage: click/tap event");
 
             if (shapesNames.indexOf(e.target.name()) !== -1) {
                 console.log("click event target was shape: " + e.target.name());
@@ -225,6 +225,9 @@ function test() {
     }
 
 
+
+    //Click events
+
     function clickOnShape(shape) {
         if (shape.getClassName() === 'Rect') {
             console.log("clicked on rectangle");
@@ -247,9 +250,15 @@ function test() {
         editorLayer.draw();
     }
 
+    function moveShape(shape) {
+        //Called when a shape is being moved around
+        //When the shape descriptions in the tree will be fragmented, they will be redrawn individually, without redrawing the whole tree
+        updateTree();
+    }
+
 
     function updateTree() {
-        let rects = editorStage.find('Shape');
+        let shapes = editorStage.find('Shape');
         let images = editorStage.find('Image');
 
         let eol = '\n\t\t\t\t-';
@@ -263,18 +272,20 @@ function test() {
             }
         });
 
-        rects.each(function(rect) {
-            if (shapesNames.indexOf(rect.name()) !== -1) {
-                shapeList += eol + rect.name();
+        shapes.each(function(s) {
+            if (shapesNames.indexOf(s.name()) !== -1) {
+                let shapeDescription = eol + s.name();
+                shapeDescription += " (x:" + Math.trunc(s.x()) + " y:" + Math.trunc(s.y()) + ")"
+                shapeList += shapeDescription;
             } else {
-                console.log("Invalid shape name : " + rect.name());
+                console.log("Invalid shape name : " + s.name());
             }
         });
         
         let treeText = 'Images' + imageList + '\n\n' + 'Shapes' + shapeList;
         treeLayer.findOne('#objectList').text(treeText);
 
-        treeLayer.draw();
+        treeLayer.batchDraw();
         console.log("Updated tree");
     }
 
@@ -297,7 +308,11 @@ function test() {
                 scaleX: 1,
                 scaleY: 1,
             });
+            updateTree();
         });
+        rectangleBlue.on('dragmove', function() {
+            updateTree();
+        })
         
         editorLayer.add(rectangleBlue);
     }
@@ -320,7 +335,11 @@ function test() {
                 scaleX: 1,
                 scaleY: 1,
             });
+            updateTree();
         });
+        rectangleRed.on('dragmove', function() {
+            updateTree();
+        })
         
         editorLayer.add(rectangleRed);
     }
@@ -337,6 +356,10 @@ function test() {
             draggable: 'false',
             opacity: 0.7,
         });
+
+        circleGreen.on('dragmove', function() {
+            updateTree();
+        })
         
         editorLayer.add(circleGreen);
     }
