@@ -275,7 +275,10 @@ function test() {
         shapes.each(function(s) {
             if (shapesNames.indexOf(s.name()) !== -1) {
                 let shapeDescription = eol + s.name();
-                shapeDescription += " (x:" + Math.trunc(s.x()) + " y:" + Math.trunc(s.y()) + ")"
+                shapeDescription += " (x:" + Math.trunc(s.x()) + " y:" + Math.trunc(s.y()) + ")";
+                //shapeDescription += " (w:" + s.width() + " h:" + s.height() + ")";
+                //shapeDescription += " (scaleX:" + s.scaleX() + " scaleY:" + s.scaleY() + ")";
+                //shapeDescription += " (offsetX:" + s.offsetX() + " offsetY:" + s.offsetY() + ")";
                 shapeList += shapeDescription;
             } else {
                 console.log("Invalid shape name : " + s.name());
