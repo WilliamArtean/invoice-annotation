@@ -292,6 +292,82 @@ function test() {
         console.log("Updated tree");
     }
 
+    function createROI() {
+        let roi = new Konva.Rect({
+            name: 'ROI',
+            x: 8,
+            y: 8,
+            width: 100,
+            height: 50,
+            stroke: 'blue',
+            strokeWidth: 2,
+            draggable: 'true',
+            strokeScaleEnabled: false,
+        });
+
+        roi.on('transform', () => {
+            roi.setAttrs({
+                width: Math.max(roi.width() * roi.scaleX(), 8),
+                height: Math.max(roi.height() * roi.scaleY(), 8),
+                scaleX: 1,
+                scaleY: 1,
+            });
+            updateTree();
+        });
+        roi.on('dragmove', function() {
+            moveShape(this);
+        })
+        
+        editorLayer.add(roi);
+    }
+    function createROIRegion() {
+        let roiRegion = new Konva.Rect({
+            name: 'ROIRegion',
+            x: 8,
+            y: 8,
+            width: 100,
+            height: 50,
+            stroke: 'blue',
+            strokeWidth: 2,
+            draggable: 'true',
+            strokeScaleEnabled: false,
+        });
+
+        roiRegion.on('transform', () => {
+            roiRegion.setAttrs({
+                width: Math.max(roiRegion.width() * roiRegion.scaleX(), 8),
+                height: Math.max(roiRegion.height() * roiRegion.scaleY(), 8),
+                scaleX: 1,
+                scaleY: 1,
+            });
+            updateTree();
+        });
+        roiRegion.on('dragmove', function() {
+            moveShape(this);
+        })
+        
+        editorLayer.add(roiRegion);
+    }
+    function createPOI() {
+        let poi = new Konva.Circle({
+            name: 'POI',
+            x: 8,
+            y: 8,
+            width: 8,
+            height: 8,
+            fill: 'green',
+            stroke: 'green',
+            strokeWidth: 1,
+            draggable: 'false',
+            opacity: 0.7,
+        });
+
+        poi.on('dragmove', function() {
+            moveShape(this);
+        })
+        
+        editorLayer.add(poi);
+    }
     function createBlueRectangle() {
         let rectangleBlue = new Konva.Rect({
             name: 'blue rectangle',
