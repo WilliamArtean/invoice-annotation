@@ -111,23 +111,24 @@ function test() {
         paletteLayer.add(paletteBorder);
 
         //Buttons that create shapes
-        let buttonRectBlue = new Konva.Rect({
+        let buttonROIRegion = new Konva.Rect({
             x: 20,
             y: 20,
+            width: 100,
+            height: 50,
+            stroke: '#468499',
+            strokeWidth: 4,
+            cornerRadius: 10,
+        });
+        let buttonROI = new Konva.Rect({
+            x: 20,
+            y: 100,
             width: 100,
             height: 50,
             stroke: 'blue',
             strokeWidth: 2,
         });
-        let buttonRectRed = new Konva.Rect({
-            x: 20,
-            y: 100,
-            width: 100,
-            height: 50,
-            stroke: 'red',
-            strokeWidth: 2,
-        });
-        let buttonGreenCircle = new Konva.Circle({
+        let buttonPOI = new Konva.Circle({
             x: 20,
             y: 180,
             width: 16,
@@ -136,18 +137,18 @@ function test() {
             strokeWidth: 2,
         });
 
-        paletteLayer.add(buttonRectBlue);
-        paletteLayer.add(buttonRectRed);
-        paletteLayer.add(buttonGreenCircle);
+        paletteLayer.add(buttonROIRegion);
+        paletteLayer.add(buttonROI);
+        paletteLayer.add(buttonPOI);
 
-        buttonRectBlue.on('click', function() {
-            createShape('blue rectangle');      //Penser à des meilleurs noms peut-être ?
+        buttonROIRegion.on('click', function() {
+            createShape('ROIRegion');
         });
-        buttonRectRed.on('click', function() {
-            createShape('red rectangle');
+        buttonROI.on('click', function() {
+            createShape('ROI');
         });
-        buttonGreenCircle.on('click', function() {
-            createShape('green circle');
+        buttonPOI.on('click', function() {
+            createShape('POI');
         });
 
         paletteLayer.draw();
@@ -204,17 +205,17 @@ function test() {
 
     function createShape(shapeName) {
         switch(shapeName) {
-            case 'blue rectangle':
-                createBlueRectangle();
-                console.log("created blue rectangle");
+            case 'ROIRegion':
+                createROIRegion();
+                console.log("created ROI Region");
                 break;
-            case 'red rectangle':
-                createRedRectangle();
-                console.log("created red rectangle");
+            case 'ROI':
+                createROI();
+                console.log("created ROI");
                 break;
-            case 'green circle':
-                createGreenCircle();
-                console.log("created green circle");
+            case 'POI':
+                createPOI();
+                console.log("created POI");
                 break;
             default:
                 console.log("Invalid shape name: cannot create shape");
@@ -327,8 +328,9 @@ function test() {
             y: 8,
             width: 100,
             height: 50,
-            stroke: 'blue',
-            strokeWidth: 2,
+            stroke: '#468499',
+            strokeWidth: 4,
+            cornerRadius: 10,
             draggable: 'true',
             strokeScaleEnabled: false,
         });
