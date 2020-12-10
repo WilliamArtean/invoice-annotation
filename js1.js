@@ -125,7 +125,7 @@ function test() {
             y: 100,
             width: 100,
             height: 50,
-            stroke: 'blue',
+            stroke: '#e03834',
             strokeWidth: 2,
         });
         let buttonPOI = new Konva.Circle({
@@ -300,7 +300,7 @@ function test() {
             y: 8,
             width: 100,
             height: 50,
-            stroke: 'blue',
+            stroke: '#e03834',
             strokeWidth: 2,
             draggable: 'true',
             strokeScaleEnabled: false,
