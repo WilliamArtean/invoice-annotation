@@ -120,8 +120,8 @@ function test() {
             strokeWidth: 2,
         });
         let buttonRectRed = new Konva.Rect({
-            x: 160,
-            y: 20,
+            x: 20,
+            y: 100,
             width: 100,
             height: 50,
             stroke: 'red',
@@ -129,7 +129,7 @@ function test() {
         });
         let buttonGreenCircle = new Konva.Circle({
             x: 20,
-            y: 100,
+            y: 180,
             width: 16,
             height: 16,
             stroke: 'green',
