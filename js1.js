@@ -436,14 +436,14 @@ function test() {
     var shapesNames = ['blue rectangle', 'red rectangle', 'green circle'];
 
     //Add transformer
-    var MIN_LENGTH = 8;
+    var MIN_SIZE = 8;
     var tr = new Konva.Transformer({
         resizeEnabled: true,
         rotateEnabled: false,
         keepRatio: false,
         ignoreStroke: true,
         boundBoxFunc: function (oldBoundBox, newBoundBox) {
-            if (Math.abs(newBoundBox.width) < MIN_LENGTH || Math.abs(newBoundBox.height) < MIN_LENGTH) {
+            if (Math.abs(newBoundBox.width) < MIN_SIZE || Math.abs(newBoundBox.height) < MIN_SIZE) {
                 return oldBoundBox;
             }
             return newBoundBox;
