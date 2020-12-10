@@ -299,6 +299,7 @@ function test() {
             stroke: 'blue',
             strokeWidth: 2,
             draggable: 'true',
+            strokeScaleEnabled: false,
         });
 
         rectangleBlue.on('transform', () => {
@@ -326,6 +327,7 @@ function test() {
             stroke: 'red',
             strokeWidth: 2,
             draggable: 'true',
+            strokeScaleEnabled: false,
         });
 
         rectangleRed.on('transform', () => {
@@ -439,6 +441,7 @@ function test() {
         resizeEnabled: true,
         rotateEnabled: false,
         keepRatio: false,
+        ignoreStroke: true,
         boundBoxFunc: function (oldBoundBox, newBoundBox) {
             if (Math.abs(newBoundBox.width) < MIN_LENGTH || Math.abs(newBoundBox.height) < MIN_LENGTH) {
                 return oldBoundBox;
