@@ -312,7 +312,7 @@ function test() {
             updateTree();
         });
         rectangleBlue.on('dragmove', function() {
-            updateTree();
+            moveShape(this);
         })
         
         editorLayer.add(rectangleBlue);
@@ -340,7 +340,7 @@ function test() {
             updateTree();
         });
         rectangleRed.on('dragmove', function() {
-            updateTree();
+            moveShape(this);
         })
         
         editorLayer.add(rectangleRed);
@@ -360,7 +360,7 @@ function test() {
         });
 
         circleGreen.on('dragmove', function() {
-            updateTree();
+            moveShape(this);
         })
         
         editorLayer.add(circleGreen);
