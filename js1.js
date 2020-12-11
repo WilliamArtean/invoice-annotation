@@ -350,7 +350,6 @@ function test() {
             draggable: 'true',
             strokeScaleEnabled: false,
         });
-
         roi.on('transform', () => {
             roi.setAttrs({
                 width: Math.max(roi.width() * roi.scaleX(), 8),
@@ -364,6 +363,7 @@ function test() {
             moveShape(this);
         })
         
+        shapes.addShape(roi);
         editorLayer.add(roi);
     }
     function createROIRegion() {
@@ -379,7 +379,6 @@ function test() {
             draggable: 'true',
             strokeScaleEnabled: false,
         });
-
         roiRegion.on('transform', () => {
             roiRegion.setAttrs({
                 width: Math.max(roiRegion.width() * roiRegion.scaleX(), 8),
@@ -393,6 +392,7 @@ function test() {
             moveShape(this);
         })
         
+        shapes.addShape(roiRegion);
         editorLayer.add(roiRegion);
     }
     function createPOI() {
@@ -408,11 +408,11 @@ function test() {
             draggable: 'false',
             opacity: 0.7,
         });
-
         poi.on('dragmove', function() {
             moveShape(this);
         })
         
+        shapes.addShape(poi);
         editorLayer.add(poi);
     }
 
