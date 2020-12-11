@@ -479,8 +479,34 @@ function test() {
         height: stageHeight
     });
     var editorLayer = new Konva.Layer();
-
     editorStage.add(editorLayer);
+
+    //Declaration of list of shapes
+    var shapes = {
+        list : [],
+
+        addShape = function (shape) {
+            list.push(shape);
+        },
+        removeShape = function (shape) {
+            for (const i in list) {
+                if (list[i].id() === shape.id()) {
+                    list.splice(i, );
+                }
+            }
+        },
+        size = function () {
+            return list.length;
+        },
+        findByID = function (id) {
+            for (const i in list) {
+                if (list[i].id() === id) {
+                    return list[i];
+                }
+            }
+            return undefined;
+        },
+    }
 
     //Declaration of valid shape names
     var shapesNames = ['ROI', 'ROIRegion', 'POI'];
