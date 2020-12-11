@@ -483,25 +483,25 @@ function test() {
 
     //Declaration of list of shapes
     var shapes = {
-        list : [],
+        list : new Array(),
 
-        addShape = function (shape) {
-            list.push(shape);
+        addShape : function (shape) {
+            shapes.list.push(shape);
         },
-        removeShape = function (shape) {
+        removeShape : function (shape) {
             for (const i in list) {
-                if (list[i].id() === shape.id()) {
-                    list.splice(i, );
+                if (shapes.list[i].id() === shape.id()) {
+                    shapes.list.splice(i, );
                 }
             }
         },
-        size = function () {
-            return list.length;
+        size : function () {
+            return shapes.list.length;
         },
-        findByID = function (id) {
-            for (const i in list) {
-                if (list[i].id() === id) {
-                    return list[i];
+        findByID : function (id) {
+            for (const i in shapes.list) {
+                if (shapes.list[i].id() === id) {
+                    return shapes.list[i];
                 }
             }
             return undefined;
