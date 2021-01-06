@@ -508,6 +508,78 @@ function test() {
         },
     }
 
+
+    //Class declarations
+    const POIUsage = {
+        NONE = 0,
+        //header bloc
+        HEADER_COMPANY_NAME = 1,
+        HEADER_INVOICE_ID = 2,
+        HEADER_CLIENT_ID = 3,
+        HEADER_LAST_DATE = 4,   
+        HEADER_LOCATION = 5,
+        HEADER_CREATION_DATE = 6,
+        //invoice table items bloc
+        PRODUCT_ID = 7,
+        PRODUCT_ISSUE_DATE = 8,
+        PRODUCT_PAYMENT_MODE = 9,
+        PRODUCT_DUE_DATE = 10,
+        PRODUCT_LABEL = 11,
+        PRODUCT_CATEGORY = 12,
+        PRODUCT_DEBIT = 13,
+        PRODUCT_CREDIT = 14,
+        PRODUCT_VAT = 15,
+        PRODUCT_VAT0000 = 16,
+        PRODUCT_VAT0210 = 17,
+        PRODUCT_VAT0550 = 18,
+        PRODUCT_VAT1000 = 19,
+        PRODUCT_VAT2000 = 20,
+        PRODUCT_VATINDEX = 21,
+        PRODUCT_SUMMARY = 22,
+        // vat table items bloc
+        VAT_LABEL = 23,
+        VAT_RATE = 24,
+        VAT_INDEX = 25,
+        //common
+        AMOUNT_VAT_EXCLUDED = 26,
+        AMOUNT_VAT = 27,
+        AMOUNT_VAT_INCLUDED = 28,
+        AMOUNT_DUE_DATE = 29,
+        // compound date
+        DATE_DAY_PART = 30,
+        DATE_MONTH_PART = 31,
+        DATE_YEAR_PART = 32,
+    };
+    Object.freeze(POIUsage);
+
+    const ROIRegionUsage = {
+        NONE = 0,
+        // main bloc
+        HEADER = 1,
+        PRODUCT_TABLE = 2,
+        PRODUCT_SUMMARY_TABLE = 3,  
+        VAT_TABLE = 4,
+        VAT_SUMMARY_TABLE = 5,
+        SUMMARY = 6,
+    };
+    Object.freeze(ROIRegionUsage);
+
+    const LineUsage = {
+        NONE = 0,
+        // product table content
+        PRODUCT_LINE = 1,
+        PRODUCT_LINE_CATEGORY = 2,
+        PRODUCT_LINE_SUBTOTAL = 3,
+        PRODUCT_LINE_SUMMARY = 4,
+        PRODUCT_LINE_INFO = 5,
+        PRODUCT_LINE_SKIPPABLE = 6,
+        // vat table content
+        VAT_LINE = 7,
+        VAT_LINE_LABELS = 8,
+        VAT_LINE_SUMMARY = 9,
+    };
+    Object.freeze(LineUsage);
+
     //Declaration of valid shape names
     var shapesNames = ['ROI', 'ROIRegion', 'POI'];
 
