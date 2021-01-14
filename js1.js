@@ -207,6 +207,9 @@ function test() {
         buttonROI.on('click', function() {
             createShape('ROI');
         });
+        buttonLine.on('click', function() {
+            createShape('Line');
+        });
         buttonTextROI.on('click', function() {
             createShape('ROI');
         });
@@ -215,6 +218,9 @@ function test() {
         });
         buttonTextPOI.on('click', function() {
             createShape('POI');
+        });
+        buttonTextLine.on('click', function() {
+            createShape('Line');
         });
 
         paletteLayer.draw();
@@ -282,6 +288,10 @@ function test() {
             case 'POI':
                 createPOI();
                 console.log("created POI");
+                break;
+            case 'Line':
+                createLine();
+                console.log("created Line");
                 break;
             default:
                 console.log("Invalid shape name: cannot create shape");
@@ -435,6 +445,34 @@ function test() {
         
         shapes.addShape(poi);
         editorLayer.add(poi);
+    }
+    function createLine() {
+        let line = new Konva.Rect({
+            name: 'Line',
+            x: 8,
+            y: 8,
+            width: 120,
+            height: 30,
+            stroke: '#0103a9',
+            strokeWidth: 1,
+            draggable: 'true',
+            strokeScaleEnabled: false,
+        });
+        line.on('transform', () => {
+            line.setAttrs({
+                width: Math.max(line.width() * line.scaleX(), 8),
+                height: Math.max(line.height() * line.scaleY(), 8),
+                scaleX: 1,
+                scaleY: 1,
+            });
+            updateTree();
+        });
+        line.on('dragmove', function() {
+            moveShape(this);
+        })
+        
+        shapes.addShape(line);
+        editorLayer.add(line);
     }
 
     //Declaration of Stages and Layers
