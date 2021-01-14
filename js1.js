@@ -237,7 +237,7 @@ function test() {
                 console.log("click event target was shape: " + e.target.name());
                 clickOnShape(e.target);
             } else {
-                console.log("click event target was not a valid shape : " + e.target.name());
+                //console.log("click event target was not a valid shape : " + e.target.name());
                 clickOnStage(editorStage);
             }
         });
@@ -358,7 +358,7 @@ function test() {
                 //shapeDescription += " (offsetX:" + s.offsetX() + " offsetY:" + s.offsetY() + ")";
                 shapeList += shapeDescription;
             } else {
-                console.log("Invalid shape name : " + s.name());
+                //console.log("Invalid shape name : " + s.name());
             }
         });
         
@@ -394,7 +394,7 @@ function test() {
             moveShape(this);
         })
         
-        shapes.addShape(roi);
+        shapeInfos.addShape(new ShapeInfo(roi));
         editorLayer.add(roi);
     }
     function createROIRegion() {
@@ -423,7 +423,7 @@ function test() {
             moveShape(this);
         })
         
-        shapes.addShape(roiRegion);
+        shapeInfos.addShape(new ShapeInfo(roiRegion));
         editorLayer.add(roiRegion);
     }
     function createPOI() {
@@ -443,7 +443,7 @@ function test() {
             moveShape(this);
         })
         
-        shapes.addShape(poi);
+        shapeInfos.addShape(new ShapeInfo(poi));
         editorLayer.add(poi);
     }
     function createLine() {
@@ -471,7 +471,7 @@ function test() {
             moveShape(this);
         })
         
-        shapes.addShape(line);
+        shapeInfos.addShape(new ShapeInfo(line));
         editorLayer.add(line);
     }
 
@@ -540,27 +540,28 @@ function test() {
     var editorLayer = new Konva.Layer();
     editorStage.add(editorLayer);
 
-    //Declaration of list of shapes
-    var shapes = {
+    //Declaration of list of shapes informations
+    var shapeInfos = {
         list : new Array(),
 
-        addShape : function (shape) {
-            shapes.list.push(shape);
+        addShape : function (shapeInfo) {
+            shapeInfos.list.push(shapeInfo);
+            console.log("Added shapeInfo. Name: " + shapeInfo.name());
         },
-        removeShape : function (shape) {
+        removeShape : function (shapeInfo) {
             for (const i in list) {
-                if (shapes.list[i].id() === shape.id()) {
-                    shapes.list.splice(i, );
+                if (shapeInfo.list[i].id() === shapeInfo.id()) {
+                    shapeInfos.list.splice(i, );
                 }
             }
         },
         size : function () {
-            return shapes.list.length;
+            return shapeInfos.list.length;
         },
         findByID : function (id) {
-            for (const i in shapes.list) {
-                if (shapes.list[i].id() === id) {
-                    return shapes.list[i];
+            for (const i in shapeInfos.list) {
+                if (shapeInfos.list[i].id() === id) {
+                    return shapeInfos.list[i];
                 }
             }
             return undefined;
@@ -664,8 +665,8 @@ function test() {
                     break;
             }
             this.usage = POIUsage.NONE;
-
-        }
+        };
+        name() { return this.shape.name() };
     };
 
     //Declaration of valid shape names
