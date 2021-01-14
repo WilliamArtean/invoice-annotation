@@ -136,7 +136,7 @@ function test() {
             stroke: 'green',
             strokeWidth: 2,
         });
-        let buttonLine = new Konva.Rect({
+        let buttonRow = new Konva.Rect({
             x: 20,
             y: 210,
             width: 100,
@@ -177,7 +177,7 @@ function test() {
             align: 'left',
             id: 'objectList',
         });
-        let buttonTextLine = new Konva.Text({
+        let buttonTextRow = new Konva.Text({
             x: 123,
             y: 207,
             text: "Line",
@@ -192,11 +192,11 @@ function test() {
         paletteLayer.add(buttonROIRegion);
         paletteLayer.add(buttonROI);
         paletteLayer.add(buttonPOI);
-        paletteLayer.add(buttonLine);
+        paletteLayer.add(buttonRow);
         paletteLayer.add(buttonTextROIRegion);
         paletteLayer.add(buttonTextROI);
         paletteLayer.add(buttonTextPOI);
-        paletteLayer.add(buttonTextLine);
+        paletteLayer.add(buttonTextRow);
 
         buttonROIRegion.on('click', function() {
             createShape('ROIRegion');
@@ -207,8 +207,8 @@ function test() {
         buttonROI.on('click', function() {
             createShape('ROI');
         });
-        buttonLine.on('click', function() {
-            createShape('Line');
+        buttonRow.on('click', function() {
+            createShape('Row');
         });
         buttonTextROI.on('click', function() {
             createShape('ROI');
@@ -219,8 +219,8 @@ function test() {
         buttonTextPOI.on('click', function() {
             createShape('POI');
         });
-        buttonTextLine.on('click', function() {
-            createShape('Line');
+        buttonTextRow.on('click', function() {
+            createShape('Row');
         });
 
         paletteLayer.draw();
@@ -289,9 +289,9 @@ function test() {
                 createPOI();
                 console.log("created POI");
                 break;
-            case 'Line':
-                createLine();
-                console.log("created Line");
+            case 'Row':
+                createRow();
+                console.log("created Row");
                 break;
             default:
                 console.log("Invalid shape name: cannot create shape");
@@ -446,9 +446,9 @@ function test() {
         shapeInfos.addShape(new ShapeInfo(poi));
         editorLayer.add(poi);
     }
-    function createLine() {
-        let line = new Konva.Rect({
-            name: 'Line',
+    function createRow() {
+        let row = new Konva.Rect({
+            name: 'Row',
             x: 8,
             y: 8,
             width: 120,
@@ -458,21 +458,21 @@ function test() {
             draggable: 'true',
             strokeScaleEnabled: false,
         });
-        line.on('transform', () => {
-            line.setAttrs({
-                width: Math.max(line.width() * line.scaleX(), 8),
-                height: Math.max(line.height() * line.scaleY(), 8),
+        row.on('transform', () => {
+            row.setAttrs({
+                width: Math.max(row.width() * row.scaleX(), 8),
+                height: Math.max(row.height() * row.scaleY(), 8),
                 scaleX: 1,
                 scaleY: 1,
             });
             updateTree();
         });
-        line.on('dragmove', function() {
+        row.on('dragmove', function() {
             moveShape(this);
         })
         
-        shapeInfos.addShape(new ShapeInfo(line));
-        editorLayer.add(line);
+        shapeInfos.addShape(new ShapeInfo(row));
+        editorLayer.add(row);
     }
 
     //Declaration of Stages and Layers
@@ -624,7 +624,7 @@ function test() {
     };
     Object.freeze(ROIRegionUsage);
 
-    const LineUsage = {
+    const RowUsage = {
         NONE : 0,
         // product table content
         PRODUCT_LINE : 1,
@@ -638,13 +638,13 @@ function test() {
         VAT_LINE_LABELS : 8,
         VAT_LINE_SUMMARY : 9,
     };
-    Object.freeze(LineUsage);
+    Object.freeze(RowUsage);
 
     const ShapeType = {
         ROIREGION : 0,
         ROI : 1,
         POI : 2,
-        LINE : 3,
+        ROW : 3,
     };
 
     let ShapeInfo = class {
@@ -660,7 +660,7 @@ function test() {
                 case 'POI':
                     this.shapeType = ShapeType.POI;
                     break;
-                case 'Line':
+                case 'Row':
                     this.shapeType = ShapeType.LINE;
                     break;
             }
@@ -670,7 +670,7 @@ function test() {
     };
 
     //Declaration of valid shape names
-    var shapesNames = ['ROI', 'ROIRegion', 'POI', 'Line'];
+    var shapesNames = ['ROI', 'ROIRegion', 'POI', 'Row'];
 
     //Add transformer
     var MIN_SIZE = 8;
