@@ -136,6 +136,14 @@ function test() {
             stroke: 'green',
             strokeWidth: 2,
         });
+        let buttonLine = new Konva.Rect({
+            x: 20,
+            y: 210,
+            width: 100,
+            height: 30,
+            stroke: '#0103a9',
+            strokeWidth: 1,
+        });
         let buttonTextROIRegion = new Konva.Text({
             x: 123,
             y: 27,
@@ -169,13 +177,26 @@ function test() {
             align: 'left',
             id: 'objectList',
         });
+        let buttonTextLine = new Konva.Text({
+            x: 123,
+            y: 207,
+            text: "Line",
+            fontSize: 20,
+            fontFamily: 'Calibri',
+            fill: 'black',
+            padding: 8,
+            align: 'left',
+            id: 'objectList',
+        });
 
         paletteLayer.add(buttonROIRegion);
         paletteLayer.add(buttonROI);
         paletteLayer.add(buttonPOI);
+        paletteLayer.add(buttonLine);
         paletteLayer.add(buttonTextROIRegion);
         paletteLayer.add(buttonTextROI);
         paletteLayer.add(buttonTextPOI);
+        paletteLayer.add(buttonTextLine);
 
         buttonROIRegion.on('click', function() {
             createShape('ROIRegion');
@@ -610,7 +631,7 @@ function test() {
     };
 
     //Declaration of valid shape names
-    var shapesNames = ['ROI', 'ROIRegion', 'POI'];
+    var shapesNames = ['ROI', 'ROIRegion', 'POI', 'Line'];
 
     //Add transformer
     var MIN_SIZE = 8;
