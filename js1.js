@@ -54,38 +54,43 @@ function test() {
             fontSize: 20,
             fontFamily: 'Calibri',
             fill: 'black',
-            width: 100,
+            width: 50,
             height: topMenuLayer.height() - 10,
             align: 'center',
             verticalAlign: 'middle',
         });
 
         var buttonEdit = new Konva.Text({
-            x: 115,
+            x: 55,
             y: 5,
             text:
                 "Edit",
             fontSize: 20,
             fontFamily: 'Calibri',
             fill: 'grey',
-            width: 100,
+            width: 50,
             height: topMenuLayer.height() - 10,
             align: 'center',
             verticalAlign: 'middle',
         });
         var buttonHelp = new Konva.Text({
-            x: 225,
+            x: 105,
             y: 5,
             text:
                 "Help",
             fontSize: 20,
             fontFamily: 'Calibri',
-            fill: 'grey',
-            width: 100,
+            fill: 'black',
+            width: 50,
             height: topMenuLayer.height() - 10,
             align: 'center',
             verticalAlign: 'middle',
         });
+        var separationLine = new Konva.Line({
+            points: [160, 0, 160, 50],
+            stroke: 'red',
+            strokeWidth: 2,
+        })
 
         buttonFile.on('click', function() {
             //console.log("clicked on File");
@@ -95,6 +100,7 @@ function test() {
         topMenuLayer.add(buttonFile);
         topMenuLayer.add(buttonEdit);
         topMenuLayer.add(buttonHelp);
+        topMenuLayer.add(separationLine);
 
         console.log(topMenuLayer);
         topMenuLayer.draw();
