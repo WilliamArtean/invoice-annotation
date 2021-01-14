@@ -580,6 +580,12 @@ function test() {
     };
     Object.freeze(LineUsage);
 
+    const ShapeType = {
+        ROIREGION : 0,
+        ROI : 1,
+        POI : 2,
+        LINE : 3,
+    };
     //Declaration of valid shape names
     var shapesNames = ['ROI', 'ROIRegion', 'POI'];
 
