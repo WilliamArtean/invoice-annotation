@@ -586,6 +586,29 @@ function test() {
         POI : 2,
         LINE : 3,
     };
+
+    let ShapeInfo = class {
+        constructor(shape) {
+            this.shape = shape;
+            switch (shape.name()) {
+                case 'ROIRegion':
+                    this.shapeType = ShapeType.ROIREGION;
+                    break;
+                case 'ROI':
+                    this.shapeType = ShapeType.ROI;
+                    break;
+                case 'POI':
+                    this.shapeType = ShapeType.POI;
+                    break;
+                case 'Line':
+                    this.shapeType = ShapeType.LINE;
+                    break;
+            }
+            this.usage = POIUsage.NONE;
+
+        }
+    };
+
     //Declaration of valid shape names
     var shapesNames = ['ROI', 'ROIRegion', 'POI'];
 
