@@ -67,7 +67,7 @@ function test() {
                 "Edit",
             fontSize: 20,
             fontFamily: 'Calibri',
-            fill: 'grey',
+            fill: 'black',
             width: 50,
             height: topMenuLayer.height() - 10,
             align: 'center',
@@ -80,7 +80,7 @@ function test() {
                 "Help",
             fontSize: 20,
             fontFamily: 'Calibri',
-            fill: 'black',
+            fill: 'grey',
             width: 50,
             height: topMenuLayer.height() - 10,
             align: 'center',
@@ -88,7 +88,7 @@ function test() {
         });
         var separationLine = new Konva.Line({
             points: [160, 0, 160, 50],
-            stroke: 'red',
+            stroke: 'black',
             strokeWidth: 2,
         })
 
