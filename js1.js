@@ -96,6 +96,9 @@ function test() {
             //console.log("clicked on File");
             loadImage();
         });
+        buttonEdit.on('click', function() {
+            createUsageButtons(ROIRegionUsage);
+        });
 
         topMenuLayer.add(buttonFile);
         topMenuLayer.add(buttonEdit);
@@ -105,6 +108,32 @@ function test() {
         console.log(topMenuLayer);
         topMenuLayer.draw();
         
+        function createUsageButtons(usages) {
+            //usages is an enum
+            var dx = 160;
+            for (const key in usages) {
+                //console.log(key);
+                let usageButton = new Konva.Text({
+                    x: dx,
+                    y: 5,
+                    text: key,
+                    fontSize: 10,
+                    fontFamily: 'Calibri',
+                    fill: 'black',
+                    width: 70,
+                    height: topMenuLayer.height() - 10,
+                    align: 'center',
+                    verticalAlign: 'middle',
+                });
+                usageButton.on('click tap', function() {
+                    changeAnnotationUsage(usageButton.text());
+                });
+                topMenuLayer.add(usageButton);
+                dx += 70;
+            }
+            topMenuLayer.draw();
+        }
+
     }
 
     function buildPalette() {
