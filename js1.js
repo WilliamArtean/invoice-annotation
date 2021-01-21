@@ -387,7 +387,8 @@ function test() {
         shapes.each(function(s) {
             if (shapesNames.indexOf(s.name()) !== -1) {
                 let shapeDescription = eol + s.name();
-                shapeDescription += " (x:" + Math.trunc(s.x()) + " y:" + Math.trunc(s.y()) + ")";
+                shapeDescription += " (" + shapeInfos.findByID(s.id()).usage + ")";
+                shapeDescription += " [x:" + Math.trunc(s.x()) + " y:" + Math.trunc(s.y()) + "]";
                 //shapeDescription += " (w:" + s.width() + " h:" + s.height() + ")";
                 //shapeDescription += " (scaleX:" + s.scaleX() + " scaleY:" + s.scaleY() + ")";
                 //shapeDescription += " (offsetX:" + s.offsetX() + " offsetY:" + s.offsetY() + ")";
@@ -699,9 +700,11 @@ function test() {
                     this.shapeType = ShapeType.LINE;
                     break;
             }
-            this.usage = POIUsage.NONE;
+            this.usage = 0;
         };
         name() { return this.shape.name() };
+        id() { return this.shape.id() };
+    };
     };
 
     //Declaration of valid shape names
