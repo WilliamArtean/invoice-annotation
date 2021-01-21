@@ -126,7 +126,7 @@ function test() {
                     verticalAlign: 'middle',
                 });
                 usageButton.on('click tap', function() {
-                    changeAnnotationUsage(usageButton.text());
+                    changeShapeInfoUsage(usageButton.text());
                 });
                 topMenuLayer.add(usageButton);
                 dx += 70;
@@ -705,6 +705,10 @@ function test() {
         name() { return this.shape.name() };
         id() { return this.shape.id() };
     };
+
+    function changeShapeInfoUsage(_usage) {
+        let selectedShapeInfo = shapeInfos.findByID(tr.nodes()[1].id());
+        selectedShapeInfo.usage = _usage;
     };
 
     //Declaration of valid shape names
