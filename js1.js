@@ -444,6 +444,7 @@ function test() {
             strokeWidth: 2,
             draggable: 'true',
             strokeScaleEnabled: false,
+            id: idCpt++,
         });
         roi.on('transform', () => {
             roi.setAttrs({
@@ -473,6 +474,7 @@ function test() {
             cornerRadius: 10,
             draggable: 'true',
             strokeScaleEnabled: false,
+            id: idCpt++,
         });
         roiRegion.on('transform', () => {
             roiRegion.setAttrs({
@@ -502,6 +504,7 @@ function test() {
             strokeWidth: 1,
             draggable: 'false',
             opacity: 0.7,
+            id: idCpt++,
         });
         poi.on('dragmove', function() {
             moveShape(this);
@@ -521,6 +524,7 @@ function test() {
             strokeWidth: 1,
             draggable: 'true',
             strokeScaleEnabled: false,
+            id: idCpt++,
         });
         row.on('transform', () => {
             row.setAttrs({
@@ -750,6 +754,9 @@ function test() {
 
     //Declaration of valid shape names
     var shapesNames = ['ROI', 'ROIRegion', 'POI', 'Row'];
+
+    //id counter (incremented every time a shape is created)
+    var idCpt = 0;
 
     //Add transformer
     var MIN_SIZE = 8;
