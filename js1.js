@@ -709,6 +709,7 @@ function test() {
     function changeShapeInfoUsage(_usage) {
         let selectedShapeInfo = shapeInfos.findByID(tr.nodes()[1].id());
         selectedShapeInfo.usage = _usage;
+        updateTree();
     };
 
     //Declaration of valid shape names
