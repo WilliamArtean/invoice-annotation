@@ -96,9 +96,6 @@ function test() {
             //console.log("clicked on File");
             loadImage();
         });
-        buttonEdit.on('click', function() {
-            createUsageButtons(ROIRegionUsage);
-        });
 
         topMenuLayer.add(buttonFile);
         topMenuLayer.add(buttonEdit);
@@ -107,33 +104,62 @@ function test() {
 
         console.log(topMenuLayer);
         topMenuLayer.draw();
-        
-        function createUsageButtons(usages) {
-            //usages is an enum
-            var dx = 160;
-            for (const key in usages) {
-                //console.log(key);
-                let usageButton = new Konva.Text({
-                    x: dx,
-                    y: 5,
-                    text: key,
-                    fontSize: 10,
-                    fontFamily: 'Calibri',
-                    fill: 'black',
-                    width: 70,
-                    height: topMenuLayer.height() - 10,
-                    align: 'center',
-                    verticalAlign: 'middle',
-                });
-                usageButton.on('click tap', function() {
-                    changeShapeInfoUsage(usageButton.text());
-                });
-                topMenuLayer.add(usageButton);
-                dx += 70;
-            }
-            topMenuLayer.draw();
+
+    }
+
+    function createChangeUsageButtons(shape) {
+        clearTopMenu();
+
+        //usages is an enum
+        let usageType;
+        let selectedShapeInfo = shapeInfos.findByID(shape.id());
+        switch (selectedShapeInfo.shapeType) {
+            case ShapeType.ROIREGION:
+                usageType = ROIRegionUsage;
+                break;
+            case ShapeType.ROI:
+                usageType = ROIUsage;
+                break;
+            case ShapeType.POI:
+                usageType = POIUsage;
+                break;
+            case ShapeType.ROW:
+                usageType = RowUsage;
+                break;
         }
 
+        var dx = 160;
+        for (const key in usageType) {
+            //console.log(key);
+            let usageButton = new Konva.Text({
+                x: dx,
+                y: 5,
+                text: key,
+                fontSize: 10,
+                fontFamily: 'Calibri',
+                fill: 'black',
+                width: 70,
+                height: topMenuLayer.height() - 10,
+                align: 'center',
+                verticalAlign: 'middle',
+                name: 'changeUsage',
+            });
+            usageButton.on('click tap', function() {
+                changeShapeInfoUsage(usageButton.text());
+            });
+            topMenuLayer.add(usageButton);
+            dx += 70;
+        }
+        topMenuLayer.draw();
+    }
+    function clearTopMenu() {
+        let buttons = topMenuStage.find('Text');
+        buttons.each(function(button) {
+            if (button.name() === 'changeUsage') {
+                button.destroy();
+            }
+        });
+        topMenuLayer.draw();
     }
 
     function buildPalette() {
@@ -271,9 +297,11 @@ function test() {
             if (shapesNames.indexOf(e.target.name()) !== -1) {
                 console.log("click event target was shape: " + e.target.name());
                 clickOnShape(e.target);
+                createChangeUsageButtons(e.target);
             } else {
                 //console.log("click event target was not a valid shape : " + e.target.name());
                 clickOnStage(editorStage);
+                clearTopMenu();
             }
         });
 
@@ -660,6 +688,13 @@ function test() {
     };
     Object.freeze(ROIRegionUsage);
 
+    const ROIUsage = {
+        NONE : 0,
+        // main bloc
+        TABLE : 1,
+    };
+    Object.freeze(ROIRegionUsage);
+
     const RowUsage = {
         NONE : 0,
         // product table content
@@ -697,13 +732,14 @@ function test() {
                     this.shapeType = ShapeType.POI;
                     break;
                 case 'Row':
-                    this.shapeType = ShapeType.LINE;
+                    this.shapeType = ShapeType.ROW;
                     break;
             }
             this.usage = 0;
         };
         name() { return this.shape.name() };
         id() { return this.shape.id() };
+        shapeType() { return this.shapeType() };
     };
 
     function changeShapeInfoUsage(_usage) {
