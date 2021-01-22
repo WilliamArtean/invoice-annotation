@@ -360,8 +360,8 @@ function test() {
                 console.log("Invalid shape name: cannot create shape");
         }
 
+        organizeShapeLayering();    //editorLayer.draw() is called there
         updateTree();
-        editorLayer.draw();
     }
 
 
@@ -371,7 +371,7 @@ function test() {
     function clickOnShape(shape) {
         if (shape.getClassName() === 'Rect') {
             console.log("clicked on rectangle");
-            shape.moveToTop();
+            //Add shape to transformer nodes (i.e. select it)
             tr.moveToTop();
             tr.nodes([shape]);
         } else {
@@ -385,6 +385,7 @@ function test() {
     }
 
     function clickOnStage(stage) {
+        //Clear tranformer nodes (i.e. deselect shapes)
         tr.nodes([]);
 
         editorLayer.draw();
@@ -394,6 +395,33 @@ function test() {
         //Called when a shape is being moved around
         //When the shape descriptions in the tree will be fragmented, they will be redrawn individually, without redrawing the whole tree
         updateTree();
+    }
+
+    function organizeShapeLayering() {
+        let shapes = editorStage.find('Shape');
+        shapes.each(function(shape) {
+            if (shape.name() === 'ROIRegion') {
+                shape.moveToBottom();
+            }
+            if (shape.name() === 'ROI') {
+                shape.moveToTop();
+            }
+        });
+        shapes.each(function(shape) {
+            if (shape.name() === 'Line') {
+                shape.moveToTop();
+            }
+        });
+        shapes.each(function(shape) {
+            if (shape.name() === 'POI') {
+                shape.moveToTop();
+            }
+        });
+        let images = editorStage.find('Image');
+        images.each(function(img) {
+            img.moveToBottom();
+        });
+        editorLayer.draw();
     }
 
 
@@ -457,7 +485,7 @@ function test() {
         });
         roi.on('dragmove', function() {
             moveShape(this);
-        })
+        });
         
         shapeInfos.addShape(new ShapeInfo(roi));
         editorLayer.add(roi);
@@ -487,7 +515,7 @@ function test() {
         });
         roiRegion.on('dragmove', function() {
             moveShape(this);
-        })
+        });
         
         shapeInfos.addShape(new ShapeInfo(roiRegion));
         editorLayer.add(roiRegion);
@@ -508,7 +536,7 @@ function test() {
         });
         poi.on('dragmove', function() {
             moveShape(this);
-        })
+        });
         
         shapeInfos.addShape(new ShapeInfo(poi));
         editorLayer.add(poi);
@@ -537,7 +565,7 @@ function test() {
         });
         row.on('dragmove', function() {
             moveShape(this);
-        })
+        });
         
         shapeInfos.addShape(new ShapeInfo(row));
         editorLayer.add(row);
