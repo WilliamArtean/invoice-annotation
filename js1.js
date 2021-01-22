@@ -145,7 +145,7 @@ function test() {
                 name: 'changeUsage',
             });
             usageButton.on('click tap', function() {
-                changeShapeInfoUsage(usageButton.text());
+                changeShapeInfoUsage(key);
             });
             topMenuLayer.add(usageButton);
             dx += 70;
@@ -747,7 +747,7 @@ function test() {
     };
 
     function changeShapeInfoUsage(_usage) {
-        let selectedShapeInfo = shapeInfos.findByID(tr.nodes()[1].id());
+        let selectedShapeInfo = shapeInfos.findByID(tr.nodes()[0].id());
         selectedShapeInfo.usage = _usage;
         updateTree();
     };
