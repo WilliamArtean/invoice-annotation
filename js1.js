@@ -440,18 +440,11 @@ function test() {
             }
         });
 
-        shapes.each(function(s) {
-            if (shapesNames.indexOf(s.name()) !== -1) {
-                let shapeDescription = eol + s.name();
-                shapeDescription += " (" + shapeInfos.findByID(s.id()).usage + ")";
-                shapeDescription += " [x:" + Math.trunc(s.x()) + " y:" + Math.trunc(s.y()) + "]";
-                //shapeDescription += " (w:" + s.width() + " h:" + s.height() + ")";
-                //shapeDescription += " (scaleX:" + s.scaleX() + " scaleY:" + s.scaleY() + ")";
-                //shapeDescription += " (offsetX:" + s.offsetX() + " offsetY:" + s.offsetY() + ")";
-                shapeList += shapeDescription;
-            } else {
-                //console.log("Invalid shape name : " + s.name());
-            }
+        shapeInfos.list.forEach(function(shapeInfo) {
+            let shapeDescription = eol + shapeInfo.name();
+            shapeDescription += " (" + shapeInfo.usage + ")";
+            shapeDescription += " [x:" + Math.trunc(shapeInfo.x()) + " y:" + Math.trunc(shapeInfo.y()) + "]";
+            shapeList += shapeDescription;
         });
         
         let treeText = 'Images' + imageList + '\n\n' + 'Shapes' + shapeList;
@@ -767,11 +760,14 @@ function test() {
                     this.shapeType = ShapeType.ROW;
                     break;
             }
-            this.usage = 0;
+            this.usage = 'NONE';
         };
-        name() { return this.shape.name() };
-        id() { return this.shape.id() };
-        shapeType() { return this.shapeType() };
+        name() { return this.shape.name(); };
+        id() { return this.shape.id(); };
+        shapeType() { return this.shapeType(); };
+        //usage() { return this.shape.usage(); };
+        x() {return this.shape.x(); };
+        y() {return this.shape.y(); };
     };
 
     function changeShapeInfoUsage(_usage) {
