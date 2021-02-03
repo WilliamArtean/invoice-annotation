@@ -307,36 +307,6 @@ function buildEditor() {
     editorLayer.draw();
 }
 
-function buildTree() {
-    //Stage & layer set up
-    let treeBorder = new Konva.Rect({
-        width: stageWidth,
-        height: stageHeight,
-        stroke: 'black',
-        strokeWidth: 2,
-    });
-    treeLayer.add(treeBorder);
-
-    var objectList = new Konva.Text({
-        x: 0,
-        y: 0,
-        text:
-            "none",
-        fontSize: 18,
-        fontFamily: 'Calibri',
-        fill: 'black',
-        width: treeLayer.width(),
-        height: treeLayer.height(),
-        padding: 8,
-        align: 'left',
-        id: 'objectList',
-    });
-
-    treeLayer.add(objectList);
-    
-    updateTree;
-}
-
 function createShape(shapeName) {
     switch(shapeName) {
         case 'ROIRegion':
@@ -425,7 +395,7 @@ function organizeShapeLayering() {
 
 
 function updateTree() {
-    let shapes = editorStage.find('Shape');
+    /*let shapes = editorStage.find('Shape');
     let images = editorStage.find('Image');
 
     let eol = '\n\t\t\t\t-';
@@ -449,7 +419,7 @@ function updateTree() {
     let treeText = 'Images' + imageList + '\n\n' + 'Shapes' + shapeList;
     treeLayer.findOne('#objectList').text(treeText);
 
-    treeLayer.batchDraw();
+    treeLayer.batchDraw();*/
     console.log("Updated tree");
 }
 
@@ -596,7 +566,7 @@ var paletteStage = new Konva.Stage({
 var paletteLayer = new Konva.Layer();
 paletteStage.add(paletteLayer);
 buildPalette();
-
+/*
 //Tree
 stageX = document.getElementById('tree').x;
 stageY = document.getElementById('tree').y;
@@ -612,7 +582,7 @@ var treeStage = new Konva.Stage({
 var treeLayer = new Konva.Layer();
 treeStage.add(treeLayer);
 buildTree();
-
+*/
 //Editor
 stageX = document.getElementById('editor').x;
 stageY = document.getElementById('editor').y;
