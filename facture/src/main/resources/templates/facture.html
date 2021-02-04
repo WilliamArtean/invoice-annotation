@@ -1,0 +1,49 @@
+
+
+<html>
+	<head>
+        <meta charset="utf8" />
+        <link rel="stylesheet" href="style.css" />
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <title>Test Konva</title>
+        <script type = "application/javascript" th:src="@{/js/src/js1.js}"></script>
+        <script type = "application/javascript" th:src="@{/js/lib/konva.js}"></script>
+        <script type = "application/javascript" th:src="@{/js/lib/jquery-3.5.1.slim.min.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    
+	<body onload="test()">
+		
+		<section>
+		    <p>Facture numéro: <span th:text="${facture.getNumero()}"/></p>
+			<p>ID: <span th:text="${facture.getId()}"/></p>
+			<p>Date: <span th:text="${facture.getDate()}"/></p>
+			<p>Nombre de pages: <span th:text="${facture.getPages().size()}"/></p>
+			<!--
+			<span th:if="${facture.getPages().size() > 0}">
+			-->
+			<ul>
+				<li th:each="page: ${facture.pages}">Page ID: <span th:text="${page.getId()}"/> / Type: <span th:text="${page.getType()}"/> / Contenu: <span th:text="${page.getContent()}"/> / Nombre d'annotations: <span th:text="${page.getAnnotations().size()}"/>
+					<ul>
+						<li th:each="annotation: ${page.annotations}">Annotation ID: <span th:text="${annotation.getId()}"/> / PosX: <span th:text="${annotation.getPosX()}"/> / PosY: <span th:text="${annotation.getPosY()}"/> / Type: <span th:text="${annotation.getType()}"/></li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		
+	    <div id="topmenu">Menu</div>
+	    
+	    <div class="mainview">
+	        <div id="palette">
+	          Palette
+	        </div>
+	        <div id="tree">
+	          Tree
+	        </div>
+	        <div id="editor">
+	          Editor
+	        </div>
+	      </div>
+		
+	</body>
+</html>
