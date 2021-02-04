@@ -47,7 +47,7 @@ public class RestFactureController {
 	static private class ImgPath{
 		public String path;
 	}
-	
+	//INUTILiSE
 	@GetMapping(value = "/facture/getimg")
 	  public ImgPath getPage() {
 		System.out.println("get img recu");
