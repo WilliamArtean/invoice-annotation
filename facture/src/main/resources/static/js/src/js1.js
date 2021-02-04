@@ -9,34 +9,7 @@ const urlParams = new URLSearchParams(queryString);
 
 function test() {
     function loadImage(imageObj) {
-      // $.ajax({
-      //   type : "POST",
-      //   contentType : "application/json",
-      //   url : "/index/test",
-      //   data : JSON.stringify(testquery),
-      //   dataType : 'json',
-      //   success : function(result) {
-      //     alert(result);
-      //     console.log(result);
-      //   },
-      //   error : function(e) {
-      //     alert("Error!")
-      //     console.log("ERROR: ", e);
-      //   }
-      // });
-      // $.ajax({
-      //   type : "GET",
-      //   url : "/facture/getimg",
-      //   contentType : "application/json",
-      //   dataType : 'json',
-      //   success: function(result){
-      //     imageObj.src = 'img/'+result.path;
-      //   },
-      //   error : function(e) {
-      //     alert("Error GET img!");
-      //     console.log("ERROR: ", e);
-      //   }
-      // });
+
       $.ajax({
         async: false,
         type : "GET",
@@ -62,6 +35,21 @@ function test() {
         alert(facture.pages[index].content);
         imageObj.src='img/'+facture.pages[index].content;
       }
+      
+      //Boucles for ne fonctionne pas je ne sais pas pourquoi donc solution de fortune avec des if ...
+      // for (var i = 0; i < facture.pages.length; i++) {
+      //   var button = document.createElement('button');
+      //   button.type = 'button';
+      //   button.innerHTML = 'Page '+i;
+      //   button.className = 'btn-styled';
+      //
+      //   button.onclick = function(){
+      //     imageObj.src='img/'+facture.pages[i].content;
+      //   };
+      //   $('#topmenu').append(button);
+      //   //$("#topmenu").append("<input type='button' onclick='changePage("+i+")'>Page</input>");
+      //
+      // }
       var button1 = document.createElement('button');
       button1.type = 'button';
       button1.innerHTML = 'Page 1';
@@ -99,19 +87,6 @@ function test() {
         $('#topmenu').append(button3);
       }
 
-      // for (var i = 0; i < facture.pages.length; i++) {
-      //   var button = document.createElement('button');
-      //   button.type = 'button';
-      //   button.innerHTML = 'Page '+i;
-      //   button.className = 'btn-styled';
-      //
-      //   button.onclick = function(){
-      //     imageObj.src='img/'+facture.pages[i].content;
-      //   };
-      //   $('#topmenu').append(button);
-      //   //$("#topmenu").append("<input type='button' onclick='changePage("+i+")'>Page</input>");
-      //
-      // }
 
       imageObj.onload = function () {
           var invoice = new Konva.Image({

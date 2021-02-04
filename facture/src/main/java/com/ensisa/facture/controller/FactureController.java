@@ -65,6 +65,8 @@ public class FactureController {
 		return "factures";
 	}
 	
+	/*===================ANCIENNCES FONCTIONS DE TEST. NE SONT PLUS UTILISEES.========================================*/
+	
 	@GetMapping("/factures/add")
 	public String TestAjout(Model model) {
 		try {
@@ -100,4 +102,7 @@ public class FactureController {
 		}
 		return "redirect:/factures";
 	}
+	
+	/*===================ANCIENNCES FONCTIONS DE TEST. NE SONT PLUS UTILISEES.========================================*/
+
 }
