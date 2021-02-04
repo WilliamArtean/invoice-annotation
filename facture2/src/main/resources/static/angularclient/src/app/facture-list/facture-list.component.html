@@ -1,0 +1,25 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Number</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let facture of factures" (click)="onSelect(facture)">
+          <td>{{ facture.id }}</td>
+          <td>{{ facture.number }}</td>
+          <td>{{ facture.date }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="selectedFacture">
+
+      <h2>Invoice # {{selectedFacture.number |uppercase}} details :</h2>
+
+    </div>
+  </div>
+</div>
